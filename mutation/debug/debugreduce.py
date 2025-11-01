@@ -5,12 +5,12 @@
 # This module is for debugging the context setter.
 
 from common.designcfgs import get_design_march_flags_nocompressed, get_design_boot_addr
-from common.spike import SPIKE_STARTADDR, FPREG_ABINAMES, get_spike_timeout_seconds
-from params.runparams import NO_REMOVE_TMPFILES, PATH_TO_TMP
-from cascade.basicblock import gen_basicblocks
-from cascade.fuzzsim import SimulatorEnum
-from cascade.spikeresolution import gen_elf_from_bbs
-from cascade.reduce import _save_ctx_and_jump_to_pillar_specific_instr
+from common.spike import SPIKE_STARTADDR, FPREG_ABINAMES, get_spike_timeout_seconds, run_trace_regs_at_pc_locs
+from common.params.runparams import NO_REMOVE_TMPFILES, PATH_TO_TMP
+from mutation.basicblock import gen_basicblocks
+from execution.fuzzsim import SimulatorEnum
+from execution.spikeresolution import gen_elf_from_bbs
+from mutation.reduce import _save_ctx_and_jump_to_pillar_specific_instr
 
 import random
 import os
@@ -233,7 +233,7 @@ def compare_parsed_traces(expected_trace: List[List[str]], actual_trace: List[Li
     print(f"Matches: {num_matches}/{num_matches + num_mismatches} -- {num_matches / (num_matches + num_mismatches) * 100}%")
 
 def debug_top(memsize: int, design_name: str, randseed: int, nmax_bbs: int, authorize_privileges: bool, start_bb: int, start_instr: int, end_addr: int):
-    from cascade.fuzzerstate import FuzzerState
+    from mutation.fuzzerstate import FuzzerState
     random.seed(randseed)
 
     # Generate the full program
@@ -317,8 +317,8 @@ def debug_top(memsize: int, design_name: str, randseed: int, nmax_bbs: int, auth
 # @return a list of fuzzerstate.num_pickable_regs
 # 1 (does not contain the zero register)
 def spike_resolution_debug(fuzzerstate, check_pc_spike_again: bool, start_bb: int, start_instr: int, num_interesting_instrs: int):
-    from cascade.spikeresolution import _transmit_addrs_to_producers_for_spike_resolution, gen_regdump_reqs, _feed_regdump_to_instrs, _check_pc_trace_from_spike
-    from cascade.util import IntRegIndivState
+    from execution.spikeresolution import _transmit_addrs_to_producers_for_spike_resolution, gen_regdump_reqs, _feed_regdump_to_instrs, _check_pc_trace_from_spike
+    from common.utils.util import IntRegIndivState
     import itertools
     
     design_name = fuzzerstate.design_name

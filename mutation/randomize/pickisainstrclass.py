@@ -2,11 +2,11 @@
 # Licensed under the General Public License, Version 3.0, see LICENSE for details.
 # SPDX-License-Identifier: GPL-3.0-only
 
-from params.runparams import DO_ASSERT
-from cascade.toleratebugs import is_tolerate_kronos_fence, is_tolerate_picorv32_fence, is_forbid_vexriscv_csrs, is_tolerate_picorv32_missingmandatorycsrs, is_tolerate_picorv32_readnonimplcsr, is_tolerate_picorv32_writehpm, is_tolerate_picorv32_readhpm_nocsrrs
-from cascade.util import ISAInstrClass, IntRegIndivState
-from params.fuzzparams import NUM_MIN_FREE_INTREGS, MAX_NUM_FENCES_PER_EXECUTION
-from cascade.privilegestate import PrivilegeStateEnum, is_ready_to_descend_privileges
+from common.params.runparams import DO_ASSERT
+from common.utils.toleratebugs import is_tolerate_kronos_fence, is_tolerate_picorv32_fence, is_forbid_vexriscv_csrs, is_tolerate_picorv32_missingmandatorycsrs, is_tolerate_picorv32_readnonimplcsr, is_tolerate_picorv32_writehpm, is_tolerate_picorv32_readhpm_nocsrrs
+from common.utils.util import ISAInstrClass, IntRegIndivState
+from common.params.fuzzparams import NUM_MIN_FREE_INTREGS, MAX_NUM_FENCES_PER_EXECUTION
+from mutation.privilegestate import PrivilegeStateEnum, is_ready_to_descend_privileges
 import random
 from copy import copy
 

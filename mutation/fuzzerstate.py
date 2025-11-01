@@ -2,19 +2,19 @@
 # Licensed under the General Public License, Version 3.0, see LICENSE for details.
 # SPDX-License-Identifier: GPL-3.0-only
 
-from params.runparams import DO_ASSERT
-from params.fuzzparams import RELOCATOR_REGISTER_ID, RDEP_MASK_REGISTER_ID, FPU_ENDIS_REGISTER_ID, MIN_NUM_PICKABLE_REGS, MAX_NUM_PICKABLE_REGS, MIN_NUM_PICKABLE_FLOATING_REGS, MAX_NUM_PICKABLE_FLOATING_REGS, MPP_BOTH_ENDIS_REGISTER_ID, MPP_TOP_ENDIS_REGISTER_ID, SPP_ENDIS_REGISTER_ID, MAX_NUM_STORE_LOCATIONS
+from common.params.runparams import DO_ASSERT
+from common.params.fuzzparams import RELOCATOR_REGISTER_ID, RDEP_MASK_REGISTER_ID, FPU_ENDIS_REGISTER_ID, MIN_NUM_PICKABLE_REGS, MAX_NUM_PICKABLE_REGS, MIN_NUM_PICKABLE_FLOATING_REGS, MAX_NUM_PICKABLE_FLOATING_REGS, MPP_BOTH_ENDIS_REGISTER_ID, MPP_TOP_ENDIS_REGISTER_ID, SPP_ENDIS_REGISTER_ID, MAX_NUM_STORE_LOCATIONS
 from common.designcfgs import is_design_32bit, design_has_float_support, design_has_double_support, design_has_muldiv_support, design_has_atop_support, design_has_misaligned_data_support, get_design_boot_addr, design_has_supervisor_mode, design_has_user_mode, design_has_compressed_support, design_has_pmp
 from common.spike import SPIKE_STARTADDR
 
-from cascade.util import ISAInstrClass, ExceptionCauseVal
-from cascade.memview import MemoryView
-from cascade.contextreplay import get_context_setter_max_size
-from cascade.privilegestate import PrivilegeState
-from cascade.randomize.pickstoreaddr import MemStoreState
-from cascade.randomize.pickreg import IntRegPickState, FloatRegPickState
-from cascade.randomize.pickisainstrclass import ISAINSTRCLASS_INITIAL_BOOSTERS
-from cascade.randomize.pickexceptionop import EXCEPTION_OP_TYPE_INITIAL_BOOSTERS
+from common.utils.util import ISAInstrClass, ExceptionCauseVal
+from common.utils.memview import MemoryView
+from execution.contextreplay import get_context_setter_max_size
+from mutation.privilegestate import PrivilegeState
+from mutation.randomize.pickstoreaddr import MemStoreState
+from mutation.randomize.pickreg import IntRegPickState, FloatRegPickState
+from mutation.randomize.pickisainstrclass import ISAINSTRCLASS_INITIAL_BOOSTERS
+from mutation.randomize.pickexceptionop import EXCEPTION_OP_TYPE_INITIAL_BOOSTERS
 
 import random
 

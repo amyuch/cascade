@@ -6,15 +6,15 @@
 
 from common.designcfgs import get_design_march_flags_nocompressed, is_design_32bit
 from common.spike import SPIKE_STARTADDR, FPREG_ABINAMES, get_spike_timeout_seconds
-from params.runparams import DO_ASSERT, NO_REMOVE_TMPFILES, PATH_TO_TMP
-from cascade.basicblock import gen_basicblocks
-from cascade.cfinstructionclasses import JALInstruction, RegImmInstruction
-from cascade.fuzzsim import SimulatorEnum, runtest_simulator
-from cascade.spikeresolution import gen_elf_from_bbs, gen_regdump_reqs_reduced, gen_ctx_regdump_reqs, run_trace_regs_at_pc_locs, spike_resolution, run_trace_all_pcs
-from cascade.contextreplay import SavedContext, gen_context_setter
-from cascade.privilegestate import PrivilegeStateEnum
-from cascade.reduce import _save_ctx_and_jump_to_pillar_specific_instr
-from cascade.debug.debugreduce import _gen_spike_dbgcmd_file_for_full_trace, parse_full_trace, compare_parsed_traces, NUM_ELEMS_PER_INSTR, INTREG_ABI_NAMES
+from common.params.runparams import DO_ASSERT, NO_REMOVE_TMPFILES, PATH_TO_TMP
+from mutation.basicblock import gen_basicblocks
+from mutation.cfinstructionclasses import JALInstruction, RegImmInstruction
+from execution.fuzzsim import SimulatorEnum, runtest_simulator
+from execution.spikeresolution import gen_elf_from_bbs, gen_regdump_reqs_reduced, gen_ctx_regdump_reqs, run_trace_regs_at_pc_locs, spike_resolution, run_trace_all_pcs
+from execution.contextreplay import SavedContext, gen_context_setter
+from mutation.privilegestate import PrivilegeStateEnum
+from mutation.reduce import _save_ctx_and_jump_to_pillar_specific_instr
+from mutation.debug.debugreduce import _gen_spike_dbgcmd_file_for_full_trace, parse_full_trace, compare_parsed_traces, NUM_ELEMS_PER_INSTR, INTREG_ABI_NAMES
 
 import random
 import os

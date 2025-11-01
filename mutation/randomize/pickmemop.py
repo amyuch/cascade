@@ -4,10 +4,10 @@
 
 # This module is responsible for choosing the memory operation addresses and address registers.
 
-from params.runparams import DO_ASSERT
+from common.params.runparams import DO_ASSERT
 import random
 
-from params.fuzzparams import MemaddrPickPolicy, MEMADDR_PICK_POLICY_WEIGTHS
+from common.params.fuzzparams import MemaddrPickPolicy, MEMADDR_PICK_POLICY_WEIGTHS
 
 # Helper function for the basic blocks
 def is_instrstr_load(instr_str: str):

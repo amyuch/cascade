@@ -6,12 +6,12 @@
 
 from common.timeout import timeout
 from common.designcfgs import get_design_boot_addr
-from params.runparams import DO_ASSERT, NO_REMOVE_TMPFILES
-from params.fuzzparams import PROBA_AUTHORIZE_PRIVILEGES
-from cascade.basicblock import gen_basicblocks
-from cascade.fuzzsim import SimulatorEnum, runtest_simulator
-from cascade.genelf import gen_elf_from_bbs
-from cascade.spikeresolution import spike_resolution
+from common.params.runparams import DO_ASSERT, NO_REMOVE_TMPFILES
+from common.params.fuzzparams import PROBA_AUTHORIZE_PRIVILEGES
+from mutation.basicblock import gen_basicblocks
+from execution.fuzzsim import SimulatorEnum, runtest_simulator
+from mutation.genelf import gen_elf_from_bbs
+from execution.spikeresolution import spike_resolution
 
 import os
 import random
@@ -29,7 +29,7 @@ def gen_new_test_instance(design_name: str, randseed: int, can_authorize_privile
 # The main function for a single fuzzer run. It creates a new fuzzer state, populates it with basic blocks, and then runs the spike resolution. It does not run the RTL simulation.
 # @return (fuzzerstate, rtl_elfpath, expected_regvals: list) where expected_regval is a list of num_pickable_regs-1 expected reg values (we ignore x0)
 def gen_fuzzerstate_elf_expectedvals(memsize: int, design_name: str, randseed: int, nmax_bbs: int, authorize_privileges: bool, check_pc_spike_again: bool, max_num_instructions: int = None, no_dependency_bias: bool = False):
-    from cascade.fuzzerstate import FuzzerState
+    from mutation.fuzzerstate import FuzzerState
     if DO_ASSERT:
         assert nmax_bbs is None or nmax_bbs > 0
 

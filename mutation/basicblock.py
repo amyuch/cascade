@@ -4,24 +4,24 @@
 
 # This script is responsible for generating the basic blocks
 
-from params.runparams import DO_ASSERT
+from common.params.runparams import DO_ASSERT
 from common.spike import SPIKE_STARTADDR
-from rv.csrids import CSR_IDS
-from params.fuzzparams import BRANCH_TAKEN_PROBA, LIMIT_MEM_SATURATION_RATIO, RANDOM_DATA_BLOCK_MIN_SIZE_BYTES, RANDOM_DATA_BLOCK_MAX_SIZE_BYTES
-from cascade.randomize.createcfinstr import create_instr, create_regfsm_instrobjs
-from cascade.randomize.pickinstrtype import gen_next_instrstr_from_isaclass
-from cascade.randomize.pickisainstrclass import gen_next_isainstrclass, ISAInstrClass
-from cascade.randomize.pickmemop import pick_memop_addr, get_alignment_bits, is_instrstr_load
-from cascade.randomize.pickfpuop import gen_fpufsm_instrs
-from cascade.randomize.pickexceptionop import gen_exception_instr, gen_tvecfill_instr, gen_epcfill_instr, gen_medeleg_instr, gen_ppfill_instrs
-from cascade.randomize.pickrandomcsrop import gen_random_csr_op
-from cascade.randomize.pickprivilegedescentop import gen_priv_descent_instr
-from cascade.cfinstructionclasses import is_placeholder, JALInstruction, JALRInstruction, BranchInstruction, ExceptionInstruction, TvecWriterInstruction, EPCWriterInstruction, GenericCSRWriterInstruction, MisalignedMemInstruction, PrivilegeDescentInstruction, EcallEbreakInstruction, SimpleExceptionEncapsulator, CSRRegInstruction
-from cascade.util import get_range_bits_per_instrclass, IntRegIndivState, BASIC_BLOCK_MIN_SPACE, INSTRUCTIONS_BY_ISA_CLASS
-from cascade.finalblock import get_finalblock_max_size,finalblock
-from cascade.initialblock import gen_initial_basic_block
-from cascade.blacklist import blacklist_changing_instructions, blacklist_final_block, blacklist_context_setter
-from cascade.privilegestate import PrivilegeStateEnum
+from mutation.rv.csrids import CSR_IDS
+from common.params.fuzzparams import BRANCH_TAKEN_PROBA, LIMIT_MEM_SATURATION_RATIO, RANDOM_DATA_BLOCK_MIN_SIZE_BYTES, RANDOM_DATA_BLOCK_MAX_SIZE_BYTES
+from mutation.randomize.createcfinstr import create_instr, create_regfsm_instrobjs
+from mutation.randomize.pickinstrtype import gen_next_instrstr_from_isaclass
+from mutation.randomize.pickisainstrclass import gen_next_isainstrclass, ISAInstrClass
+from mutation.randomize.pickmemop import pick_memop_addr, get_alignment_bits, is_instrstr_load
+from mutation.randomize.pickfpuop import gen_fpufsm_instrs
+from mutation.randomize.pickexceptionop import gen_exception_instr, gen_tvecfill_instr, gen_epcfill_instr, gen_medeleg_instr, gen_ppfill_instrs
+from mutation.randomize.pickrandomcsrop import gen_random_csr_op
+from mutation.randomize.pickprivilegedescentop import gen_priv_descent_instr
+from mutation.cfinstructionclasses import is_placeholder, JALInstruction, JALRInstruction, BranchInstruction, ExceptionInstruction, TvecWriterInstruction, EPCWriterInstruction, GenericCSRWriterInstruction, MisalignedMemInstruction, PrivilegeDescentInstruction, EcallEbreakInstruction, SimpleExceptionEncapsulator, CSRRegInstruction
+from common.utils.util import get_range_bits_per_instrclass, IntRegIndivState, BASIC_BLOCK_MIN_SPACE, INSTRUCTIONS_BY_ISA_CLASS
+from mutation.finalblock import get_finalblock_max_size,finalblock
+from mutation.initialblock import gen_initial_basic_block
+from common.utils.blacklist import blacklist_changing_instructions, blacklist_final_block, blacklist_context_setter
+from mutation.privilegestate import PrivilegeStateEnum
 
 import random
 

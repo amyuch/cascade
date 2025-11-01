@@ -6,15 +6,15 @@
 
 from common.designcfgs import get_design_march_flags_nocompressed, get_design_boot_addr, get_design_cascade_path
 from common.spike import SPIKE_STARTADDR
-from cascade.basicblock import gen_basicblocks
-from cascade.cfinstructionclasses import JALInstruction, RegImmInstruction
-from cascade.fuzzsim import SimulatorEnum, runtest_simulator
-from cascade.spikeresolution import gen_elf_from_bbs, gen_regdump_reqs_reduced, gen_ctx_regdump_reqs, run_trace_regs_at_pc_locs, spike_resolution
-from cascade.contextreplay import SavedContext, gen_context_setter
-from cascade.privilegestate import PrivilegeStateEnum
-from params.runparams import DO_ASSERT, NO_REMOVE_TMPFILES
+from mutation.basicblock import gen_basicblocks
+from mutation.cfinstructionclasses import JALInstruction, RegImmInstruction
+from execution.fuzzsim import SimulatorEnum, runtest_simulator
+from execution.spikeresolution import gen_elf_from_bbs, gen_regdump_reqs_reduced, gen_ctx_regdump_reqs, run_trace_regs_at_pc_locs, spike_resolution
+from execution.contextreplay import SavedContext, gen_context_setter
+from mutation.privilegestate import PrivilegeStateEnum
+from common.params.runparams import DO_ASSERT, NO_REMOVE_TMPFILES
 
-from copy import deepcopy
+from copy import deepcopy, copy
 import itertools
 import os
 import random
@@ -118,7 +118,7 @@ def _save_ctx_and_jump_to_pillar_specific_instr(fuzzerstate, index_first_bb_to_c
     curr_id_in_dumpedvals += 1
 
     if DO_ASSERT:
-        assert csr_count_fordebug == NUM_CSRS, "The number of CSRs found is not the expected one. Found: " + str(csr_count_fordebug) + ", expected: " + str(num_csrs)
+        assert csr_count_fordebug == NUM_CSRS, "The number of CSRs found is not the expected one. Found: " + str(csr_count_fordebug) + ", expected: " + str(NUM_CSRS)
 
     if fuzzerstate.design_has_fpu:
         # We only take the low part of the floats, because (currently) spike represents them on 16 bytes.
@@ -631,7 +631,7 @@ def _turn_sandwich_instructions_into_nops(fuzzerstate, failing_bb_id: int, faili
 # @param find_pillars: If false, the front of the test case will not be reduced.
 # @return a boolean indicating whether the reduction was successful, a float measuring the elapesd time (in seconds), and the number of instructions in the test case.
 def reduce_program(memsize: int, design_name: str, randseed: int, nmax_bbs: int, authorize_privileges: bool, find_pillars: bool, quiet: bool = False, target_dir: str = None, hint_left_bound_bb: int = None, hint_right_bound_bb: int = None, hint_left_bound_instr: int = None, hint_right_bound_instr: int = None, hint_left_bound_pillar_bb: int = None, hint_right_bound_pillar_bb: int = None, hint_left_bound_pillar_instr: int = None, hint_right_bound_pillar_instr: int = None, check_pc_spike_again: bool = False):
-    from cascade.fuzzerstate import FuzzerState
+    from mutation.fuzzerstate import FuzzerState
 
     ###
     # Prepare the basic blocks

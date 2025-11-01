@@ -4,14 +4,14 @@
 
 # This module defines the initial basic block of the program.
 
-from params.runparams import DO_ASSERT
+from common.params.runparams import DO_ASSERT
 from rv.csrids import CSR_IDS
-from cascade.toleratebugs import is_forbid_vexriscv_csrs
-from cascade.cfinstructionclasses import ImmRdInstruction, RegImmInstruction, R12DInstruction, IntLoadInstruction, FloatLoadInstruction, CSRRegInstruction
-from cascade.randomize.createcfinstr import create_instr
-from cascade.randomize.pickisainstrclass import ISAInstrClass
-from cascade.util import get_range_bits_per_instrclass, BASIC_BLOCK_MIN_SPACE
-from params.fuzzparams import RELOCATOR_REGISTER_ID, RDEP_MASK_REGISTER_ID, FPU_ENDIS_REGISTER_ID, MPP_BOTH_ENDIS_REGISTER_ID, MPP_TOP_ENDIS_REGISTER_ID, SPP_ENDIS_REGISTER_ID
+from common.utils.toleratebugs import is_forbid_vexriscv_csrs
+from mutation.cfinstructionclasses import ImmRdInstruction, RegImmInstruction, R12DInstruction, IntLoadInstruction, FloatLoadInstruction, CSRRegInstruction
+from mutation.randomize.createcfinstr import create_instr
+from mutation.randomize.pickisainstrclass import ISAInstrClass
+from common.utils.util import get_range_bits_per_instrclass, BASIC_BLOCK_MIN_SPACE
+from common.params.fuzzparams import RELOCATOR_REGISTER_ID, RDEP_MASK_REGISTER_ID, FPU_ENDIS_REGISTER_ID, MPP_BOTH_ENDIS_REGISTER_ID, MPP_TOP_ENDIS_REGISTER_ID, SPP_ENDIS_REGISTER_ID
 from rv.asmutil import li_into_reg
 
 import random

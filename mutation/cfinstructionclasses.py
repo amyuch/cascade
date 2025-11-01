@@ -4,22 +4,22 @@
 
 # This script defines.
 
-from params.fuzzparams import MAX_NUM_PICKABLE_REGS, RELOCATOR_REGISTER_ID, RDEP_MASK_REGISTER_ID, FPU_ENDIS_REGISTER_ID, MPP_BOTH_ENDIS_REGISTER_ID, MPP_TOP_ENDIS_REGISTER_ID, SPP_ENDIS_REGISTER_ID
-from params.runparams import DO_ASSERT
-from rv.csrids import CSR_IDS
-from rv.util import INSTRUCTION_IDS, PARAM_SIZES_BITS_32, PARAM_SIZES_BITS_64, PARAM_IS_SIGNED
-from rv.asmutil import li_into_reg, twos_complement, to_unsigned
-from rv.rvprivileged import rvprivileged_mret, rvprivileged_sret
-from rv.zifencei import *
-from rv.zicsr import *
-from rv.rv32i import *
-from rv.rv32f import *
-from rv.rv32d import *
-from rv.rv32m import *
-from rv.rv64i import *
-from rv.rv64f import *
-from rv.rv64d import *
-from rv.rv64m import *
+from common.params.fuzzparams import MAX_NUM_PICKABLE_REGS, RELOCATOR_REGISTER_ID, RDEP_MASK_REGISTER_ID, FPU_ENDIS_REGISTER_ID, MPP_BOTH_ENDIS_REGISTER_ID, MPP_TOP_ENDIS_REGISTER_ID, SPP_ENDIS_REGISTER_ID
+from common.params.runparams import DO_ASSERT
+from mutation.rv.csrids import CSR_IDS
+from mutation.rv.util import INSTRUCTION_IDS, PARAM_SIZES_BITS_32, PARAM_SIZES_BITS_64, PARAM_IS_SIGNED
+from mutation.rv.asmutil import li_into_reg, twos_complement, to_unsigned
+from mutation.rv.rvprivileged import  rvprivileged_mret, rvprivileged_sret
+from mutation.rv.zifencei import *
+from mutation.rv.zicsr import *
+from mutation.rv.rv32i import *
+from mutation.rv.rv32f import *
+from mutation.rv.rv32d import *
+from mutation.rv.rv32m import *
+from mutation.rv.rv64i import *
+from mutation.rv.rv64f import *
+from mutation.rv.rv64d import *
+from mutation.rv.rv64m import *
 
 import random
 

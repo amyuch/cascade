@@ -4,9 +4,9 @@
 
 # This script is used to pick an instruction from the privileged descent instruction ISA class.
 
-from params.runparams import DO_ASSERT
-from cascade.privilegestate import PrivilegeStateEnum
-from cascade.cfinstructionclasses import PrivilegeDescentInstruction
+from common.params.runparams import DO_ASSERT
+from mutation.privilegestate import PrivilegeStateEnum
+from mutation.cfinstructionclasses import PrivilegeDescentInstruction
 
 # @brief Generate a privileged descent instruction or an mpp/spp write instruction.
 # @return a list of instructions

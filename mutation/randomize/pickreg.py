@@ -2,10 +2,10 @@
 # Licensed under the General Public License, Version 3.0, see LICENSE for details.
 # SPDX-License-Identifier: GPL-3.0-only
 
-from params.runparams import DO_ASSERT, DO_EXPENSIVE_ASSERT
-from params.fuzzparams import REGPICK_PROTUBERANCE_RATIO, NUM_MIN_FREE_INTREGS
-from cascade.randomize.createcfinstr import create_targeted_producer0_instrobj, create_targeted_producer1_instrobj, create_targeted_consumer_instrobj
-from cascade.util import IntRegIndivState
+from common.params.runparams import DO_ASSERT, DO_EXPENSIVE_ASSERT
+from common.params.fuzzparams import REGPICK_PROTUBERANCE_RATIO, NUM_MIN_FREE_INTREGS
+from mutation.randomize.createcfinstr import create_targeted_producer0_instrobj, create_targeted_producer1_instrobj, create_targeted_consumer_instrobj
+from common.utils.util import IntRegIndivState
 
 from copy import copy, deepcopy
 import math

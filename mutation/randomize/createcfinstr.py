@@ -5,12 +5,12 @@
 import random
 import numpy as np
 
-from params.runparams import DO_ASSERT
+from common.params.runparams import DO_ASSERT
 
-from params.fuzzparams import NUM_MIN_FREE_INTREGS, REG_FSM_WEIGHTS, NONTAKEN_BRANCH_INTO_RANDOM_DATA_PROBA
-from cascade.util import IntRegIndivState
-from cascade.cfinstructionclasses import *
-from rv.util import PARAM_REGTYPE, PARAM_SIZES_BITS_32, PARAM_SIZES_BITS_64
+from common.params.fuzzparams import NUM_MIN_FREE_INTREGS, REG_FSM_WEIGHTS, NONTAKEN_BRANCH_INTO_RANDOM_DATA_PROBA
+from common.utils.util import IntRegIndivState
+from mutation.cfinstructionclasses import *
+from mutation.rv.util import PARAM_REGTYPE, PARAM_SIZES_BITS_32, PARAM_SIZES_BITS_64
 
 # This module creates an instruction from its instruction string, and some state which will condition which registers and immediates will be picked, and with which probability.
 

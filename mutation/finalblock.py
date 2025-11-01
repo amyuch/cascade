@@ -4,13 +4,13 @@
 
 # This module defines the final block.
 
-from params.runparams import DO_ASSERT
-from rv.csrids import CSR_IDS
+from common.params.runparams import DO_ASSERT
+from mutation.rv.csrids import CSR_IDS
 from common.designcfgs import is_design_32bit, get_design_stop_sig_addr, get_design_reg_dump_addr, design_has_float_support, design_has_double_support, get_design_fpreg_dump_addr
-from params.fuzzparams import RDEP_MASK_REGISTER_ID, MAX_NUM_PICKABLE_REGS, MAX_NUM_PICKABLE_FLOATING_REGS, FPU_ENDIS_REGISTER_ID
-from cascade.privilegestate import PrivilegeStateEnum
-from rv.asmutil import li_into_reg
-from cascade.cfinstructionclasses import ImmRdInstruction, RegImmInstruction, IntStoreInstruction, FloatStoreInstruction, JALInstruction, SpecialInstruction, CSRRegInstruction
+from common.params.fuzzparams import RDEP_MASK_REGISTER_ID, MAX_NUM_PICKABLE_REGS, MAX_NUM_PICKABLE_FLOATING_REGS, FPU_ENDIS_REGISTER_ID
+from mutation.privilegestate import PrivilegeStateEnum
+from mutation.rv.asmutil import li_into_reg
+from mutation.cfinstructionclasses import ImmRdInstruction, RegImmInstruction, IntStoreInstruction, FloatStoreInstruction, JALInstruction, SpecialInstruction, CSRRegInstruction
 
 def get_finalblock_max_size():
     return (10 + 2*MAX_NUM_PICKABLE_REGS + 2*MAX_NUM_PICKABLE_FLOATING_REGS - 1) * 4

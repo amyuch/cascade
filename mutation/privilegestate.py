@@ -2,8 +2,8 @@
 # Licensed under the General Public License, Version 3.0, see LICENSE for details.
 # SPDX-License-Identifier: GPL-3.0-only
 
-from params.runparams import DO_ASSERT
-from cascade.util import ExceptionCauseVal, IntRegIndivState
+from common.params.runparams import DO_ASSERT
+from common.utils.util import ExceptionCauseVal, IntRegIndivState
 from functools import reduce
 from enum import IntEnum
 

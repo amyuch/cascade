@@ -5,8 +5,8 @@
 # In this module, we propose the simple solution of pre-allocating data ranges before instruction generation starts.
 # `Store locations` are 8-byte aligned, 8-byte size locations in memory.
 
-from params.runparams import DO_ASSERT
-from cascade.memview import MemoryView
+from common.params.runparams import DO_ASSERT
+from common.utils.memview import MemoryView
 
 import numpy as np
 import random
