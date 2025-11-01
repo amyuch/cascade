@@ -29,6 +29,10 @@ class FuzzerState:
         self.memsize = memsize
         self.authorize_privileges = authorize_privileges
 
+        # HTIF symbol addresses – filled later by genelf_from_bbs
+        self.tohost_addr   = None
+        self.fromhost_addr = None
+
         self.design_name = design_name
         self.design_base_addr = design_base_addr
         self.is_design_64bit = not is_design_32bit(design_name)

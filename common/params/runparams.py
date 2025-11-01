@@ -7,8 +7,8 @@ if "CASCADE_ENV_SOURCED" not in os.environ:
 PATH_TO_TMP = os.path.join(os.environ['CASCADE_DATADIR'])
 os.makedirs(PATH_TO_TMP, exist_ok=True)
 
-PATH_TO_FIGURES = os.environ['CASCADE_PATH_TO_FIGURES']
-os.makedirs(PATH_TO_FIGURES, exist_ok=True)
+# PATH_TO_FIGURES = os.environ['CASCADE_PATH_TO_FIGURES']
+# os.makedirs(PATH_TO_FIGURES, exist_ok=True)
 
 DO_ASSERT = True
 DO_EXPENSIVE_ASSERT = False # More expensive assertions

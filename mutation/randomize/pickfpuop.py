@@ -5,7 +5,7 @@
 # This module is responsible for picking floating-point operations
 
 from common.params.runparams import DO_ASSERT
-from rv.csrids import CSR_IDS
+from mutation.rv.csrids import CSR_IDS
 from common.params.fuzzparams import FPU_ENDIS_REGISTER_ID
 from mutation.privilegestate import PrivilegeStateEnum
 from mutation.cfinstructionclasses import CSRRegInstruction, RegImmInstruction

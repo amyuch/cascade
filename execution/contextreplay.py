@@ -5,13 +5,13 @@
 # This module is responsible for setting up the context for pruning the basic blocks and instructions happening before the faulty instruction.
 
 from dataclasses import dataclass
-from params.runparams import DO_ASSERT
-from params.fuzzparams import MAX_NUM_PICKABLE_REGS, MPP_TOP_ENDIS_REGISTER_ID, MPP_BOTH_ENDIS_REGISTER_ID
-from rv.csrids import CSR_IDS
+from common.params.runparams import DO_ASSERT
+from common.params.fuzzparams import MAX_NUM_PICKABLE_REGS, MPP_TOP_ENDIS_REGISTER_ID, MPP_BOTH_ENDIS_REGISTER_ID
+from mutation.rv.csrids import CSR_IDS
 from common.spike import SPIKE_STARTADDR
-from cascade.privilegestate import PrivilegeStateEnum
-from cascade.cfinstructionclasses import ImmRdInstruction, RegImmInstruction, IntLoadInstruction, IntStoreInstruction, FloatLoadInstruction, CSRRegInstruction, JALInstruction, RawDataWord, PrivilegeDescentInstruction
-from cascade.randomize.pickstoreaddr import ALIGNMENT_BITS_MAX
+from mutation.privilegestate import PrivilegeStateEnum
+from mutation.cfinstructionclasses import ImmRdInstruction, RegImmInstruction, IntLoadInstruction, IntStoreInstruction, FloatLoadInstruction, CSRRegInstruction, JALInstruction, RawDataWord, PrivilegeDescentInstruction
+from mutation.randomize.pickstoreaddr import ALIGNMENT_BITS_MAX
 
 # @brief This function computes an upper bound on the size of the context setter basic block.
 # Do not functools.cache because it is cheap to compute, even though it is not expected to change during a fuzzing run.

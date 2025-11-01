@@ -8,7 +8,7 @@ import itertools
 import os
 import subprocess
 from pathlib import Path
-from params.runparams import DO_ASSERT, PATH_TO_TMP, NO_REMOVE_TMPFILES
+from common.params.runparams import DO_ASSERT, PATH_TO_TMP, NO_REMOVE_TMPFILES
 from functools import cache
 
 SPIKE_STARTADDR = 0x80000000
@@ -252,14 +252,15 @@ def _get_spike_ns_per_instr() -> int:
     return __spike_ns_per_instr
 
 def get_spike_timeout_seconds() -> int:
-    return max((SPIKE_TIMEOUT_SLACK_FACTOR*_get_spike_ns_per_instr())/1e9, 10)
+    # return max((SPIKE_TIMEOUT_SLACK_FACTOR*_get_spike_ns_per_instr())/1e9, 10)
+    return 60
 
 # @brief Runs a spike instance and returns the average nanoseconds per instruction.
 @cache
 def calibrate_spikespeed(numinstrs:int = 10000) -> list:
     global __spike_ns_per_instr
     from common.bytestoelf import gen_elf
-    from rv.rv32i import rv32i_jal
+    from mutation.rv.rv32i import rv32i_jal
     from time import time_ns
 
     # First, create the file that contains the commands, if it does not already exist

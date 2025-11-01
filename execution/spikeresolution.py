@@ -2,13 +2,13 @@
 # Licensed under the General Public License, Version 3.0, see LICENSE for details.
 # SPDX-License-Identifier: GPL-3.0-only
 
-from params.runparams import DO_ASSERT, NO_REMOVE_TMPFILES
+from common.params.runparams import DO_ASSERT, NO_REMOVE_TMPFILES
 from common.designcfgs import get_design_march_flags_nocompressed
 from common.spike import run_trace_all_pcs, run_trace_regs_at_pc_locs, SPIKE_STARTADDR, FPREG_ABINAMES
 
-from cascade.cfinstructionclasses import PlaceholderConsumerInstr, BranchInstruction, PlaceholderProducerInstr0, PlaceholderProducerInstr1, JALRInstruction, PlaceholderPreConsumerInstr, IntStoreInstruction, FloatStoreInstruction
-from cascade.genelf import gen_elf_from_bbs
-from cascade.util import IntRegIndivState
+from mutation.cfinstructionclasses import PlaceholderConsumerInstr, BranchInstruction, PlaceholderProducerInstr0, PlaceholderProducerInstr1, JALRInstruction, PlaceholderPreConsumerInstr, IntStoreInstruction, FloatStoreInstruction
+from mutation.genelf import gen_elf_from_bbs
+from common.utils.util import IntRegIndivState
 
 import os
 import random

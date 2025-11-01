@@ -23,7 +23,37 @@ from mutation.initialblock import gen_initial_basic_block
 from common.utils.blacklist import blacklist_changing_instructions, blacklist_final_block, blacklist_context_setter
 from mutation.privilegestate import PrivilegeStateEnum
 
+# ----------  NEW: concrete instruction classes for shutdown sequence ----------
+from mutation.cfinstructionclasses import RegImmInstruction, IntStoreInstruction, ImmRdInstruction
+# -----------------------------------------------------------------------------
+
 import random
+
+# -------------------------------------------------------------------------
+#  Helper: emit "store 64-bit immediate to absolute address" in 3 instructions
+# -------------------------------------------------------------------------
+def emit_sd_abs(bb_list, src_reg, abs_addr, is_64bit):
+    """
+    Append instructions to bb_list that perform:
+        sd src_reg, 0(tmp)   # with tmp holding abs_addr
+    tmp is chosen as x31 (t6) – caller must make sure it is free or spill it.
+    """
+    tmp_reg = 31  # t6
+    # 1. lui tmp, upper(abs_addr)
+    upper = (abs_addr + 0x800) >> 12  # add 0x800 to round correctly
+    bb_list.append(ImmRdInstruction("lui", tmp_reg, upper, is_64bit))
+    # 2. addi tmp, tmp, lower(abs_addr)
+    lower = abs_addr & 0xFFF
+    if lower >= 0x800:  # lower is negative in 12-bit signed world
+        lower -= 0x1000
+        upper += 1
+        bb_list[-1] = ImmRdInstruction("lui", tmp_reg, upper, is_64bit)
+    bb_list.append(RegImmInstruction("addi", tmp_reg, tmp_reg, lower, is_64bit))
+    # 3. sd src_reg, 0(tmp)
+    bb_list.append(IntStoreInstruction("sd", tmp_reg, src_reg, 0,
+                                       producer_id=-1,
+                                       is_design_64bit=is_64bit))
+# -------------------------------------------------------------------------
 
 # @brief Generates a series of basic blocks.
 # Does not transmit the next bb address to the control flow instructions.
@@ -70,7 +100,6 @@ def gen_basicblocks(fuzzerstate):
                   or fuzzerstate.has_reached_max_instr_num():
                 break
             fuzzerstate.memview.alloc_mem_range(fuzzerstate.next_bb_addr, BASIC_BLOCK_MIN_SPACE)
-            # print('Mem occupation:', fuzzerstate.memview.get_allocated_ratio(), end='\r')
 
         # Find a suitable last bb and connect it with the final block
         pop_success = pop_last_bbs_to_connect_with_final_block(fuzzerstate)
@@ -90,6 +119,22 @@ def gen_basicblocks(fuzzerstate):
     # bounds over the basic block size.
     blacklist_final_block(fuzzerstate) 
     blacklist_context_setter(fuzzerstate)
+
+    # -------------------------------------------------------------------------
+    # Inject shutdown sequence into the *last* user basic block
+    # -------------------------------------------------------------------------
+    # We only do this for the *real* simulation ELF, not for the spike-resolution ELF
+    if fuzzerstate.instr_objs_seq and fuzzerstate.tohost_addr is not None:
+        last_bb = fuzzerstate.instr_objs_seq[-1]
+        tohost_addr = fuzzerstate.tohost_addr          # set by genelf
+
+        # li  t0, 1
+        last_bb.append(RegImmInstruction("addi", rd=5, rs1=0, imm=1,
+                                        is_design_64bit=fuzzerstate.is_design_64bit))
+        # sd  t0, tohost
+        emit_sd_abs(last_bb, src_reg=5, abs_addr=tohost_addr,
+                    is_64bit=fuzzerstate.is_design_64bit)
+    # -------------------------------------------------------------------------
 
     # Generate addresses for memory operations
     memop_addrs = gen_memop_addrs(fuzzerstate)

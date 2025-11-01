@@ -2,7 +2,7 @@
 # Licensed under the General Public License, Version 3.0, see LICENSE for details.
 # SPDX-License-Identifier: GPL-3.0-only
 
-import rv.rvprotoinstrs as rvprotoinstrs
+import mutation.rv.rvprotoinstrs as rvprotoinstrs
 
 ZICSR_OPCODE_CSR = 0b1110011
 

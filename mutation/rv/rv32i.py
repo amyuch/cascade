@@ -2,7 +2,7 @@
 # Licensed under the General Public License, Version 3.0, see LICENSE for details.
 # SPDX-License-Identifier: GPL-3.0-only
 
-import rv.rvprotoinstrs as rvprotoinstrs
+import mutation.rv.rvprotoinstrs as rvprotoinstrs
 
 RV32I_OPCODE_LUI     = 0b0110111
 RV32I_OPCODE_AUIPC   = 0b0010111

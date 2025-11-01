@@ -6,7 +6,7 @@
 # The script is not super robust, but sufficient for Cascade.
 # It may be a performance bottleneck of Cascade, so it will be worth optimizing it at some point.
 
-from params.runparams import DO_ASSERT
+from common.params.runparams import DO_ASSERT
 from makeelf.elf import *
 import os
 import subprocess
